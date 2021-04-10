@@ -1,0 +1,11 @@
+.idea/
+
+cmake-build-debug/
+
+*.o
+tail
+wordcount
+wordcount-dynamic
+libhtab.a
+libhtab.so
+xsmahe01.zip
