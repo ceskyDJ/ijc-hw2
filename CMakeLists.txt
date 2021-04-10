@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(IJC\ |\ 2nd\ homework C)
+project(IJC\ |\ 2nd\ homework LANGUAGES C CXX)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_COMPILER gcc)
