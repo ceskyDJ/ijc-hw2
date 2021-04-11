@@ -1,20 +1,14 @@
 name: tail-tests
 on: [push]
 jobs:
-  build:
-    name: Build binary
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Run Make
-        run: cd ./src; make
-
   unit:
     name: Unit tests for tail
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Build binary
+        run: cd ./src; make
 
       - name: Run tests
         run: ./test/tail-unit.sh 2> /dev/null
@@ -27,6 +21,9 @@ jobs:
 
       - name: Install Valgrind
         run: apt install -y valgrind
+
+      - name: Build binary
+        run: cd ./src; make
 
       - name: Run tests
         run: ./test/tail-valgrind.sh 2> /dev/null
