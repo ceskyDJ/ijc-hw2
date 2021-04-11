@@ -12,7 +12,3 @@ jobs:
 
       - name: Run Cppcheck
         uses: Bedzior/cppcheck-action@v2.0.0
-        with:
-          enabled checks: all
-          enable inconclusive: true
-          path: ./src
