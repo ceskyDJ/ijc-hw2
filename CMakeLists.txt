@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.19)
 project(IJC\ |\ 2nd\ homework LANGUAGES C CXX)
 set(CMAKE_SOURCE_DIR src/)
+set(PROJECT_BINARY_DIR ../src/)
+set(CMAKE_BINARY_DIR ../src/)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../src/)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_COMPILER gcc)
