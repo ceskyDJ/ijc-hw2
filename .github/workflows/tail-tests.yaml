@@ -7,8 +7,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Move to the src dir
+        run: cd ./src
+
       - name: Run Make
-        run: make -f ./src/Makefile
+        run: make
 
   unit:
     name: Unit tests for tail
