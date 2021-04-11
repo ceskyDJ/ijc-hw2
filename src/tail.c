@@ -13,12 +13,6 @@
 // Maximum row size in memory (MAX_ROW_LENGTH +1 => '\n', +1 => '\0')
 #define ROW_SIZE MAX_ROW_LENGTH + 2
 
-// Buffer with loaded lines
-typedef struct buffer {
-    char **data;
-    int capacity; // Number of rows that can be inserted into the buffer
-} buffer_t;
-
 int main(int argc, char *argv[]) {
     // File to read from
     FILE *input_file = stdin;
@@ -60,19 +54,30 @@ int main(int argc, char *argv[]) {
     }
 
     // Prepare buffer with initial allocated memory
-    buffer_t buffer = {.capacity = 1};
-    if ((buffer.data = malloc(sizeof(char *))) == NULL) {
-        fprintf(stderr, "Nepodařilo se alokovat paměť pro pomocný buffer\n");
-        exit(1);
+    char **buffer;
+    if (end_offset) {
+        if ((buffer = malloc(row_offset * sizeof(char *))) == NULL) {
+            fprintf(stderr, "Nepodařilo se alokovat paměť pro buffer\n");
+            exit(1);
+        }
+
+        for (int i = 0; i < row_offset; i++) {
+            if ((buffer[i] = malloc(ROW_SIZE)) == NULL) {
+                fprintf(stderr, "Nepodařilo se alokovat paměť pro řádek bufferu\n");
+                exit(1);
+            }
+
+            memset(buffer[i], '\0', ROW_SIZE);
+        }
     }
 
-    // Load rows into buffer
+    // Load rows into buffer or write rows
     int i = 0;
     bool warned = false;
     bool ignore_next = false;
     char read_line[ROW_SIZE];
     // +1 => '\0'
-    while ((fgets(read_line, MAX_ROW_LENGTH + 1, input_file)) != NULL) {
+    while ((fgets(read_line, ROW_SIZE, input_file)) != NULL) {
         // Ignore this part of the file (for skipping parts outside maximum file length)
         if (ignore_next) {
             // Don't ignore next part if the whole row has been read yet
@@ -98,25 +103,18 @@ int main(int argc, char *argv[]) {
             ignore_next = true;
         }
 
-        // Resizing buffer if needed
-        if (i >= buffer.capacity) {
-            char **tmp_ptr;
-            if ((tmp_ptr = realloc(buffer.data, sizeof(char *) * buffer.capacity * 2)) == NULL) {
-                fprintf(stderr, "Nepodařilo se přialokovat paměť pro pomocný buffer\n");
-                free(tmp_ptr);
-                exit(1);
+        if (end_offset) {
+            // Shift buffer rows
+            for (int j = 0; j < row_offset - 1; j++) {
+                memcpy(buffer[j], buffer[j + 1], ROW_SIZE);
             }
 
-            buffer.data = tmp_ptr;
-            buffer.capacity *= 2;
+            // Put the content to the end row of the buffer
+            memcpy(buffer[row_offset - 1], read_line, ROW_SIZE);
+        } else if (i >= row_offset - 1) {
+            printf("%s", read_line);
         }
 
-        if ((buffer.data[i] = malloc(ROW_SIZE)) == NULL) {
-            fprintf(stderr, "Nepodařilo se alokovat paměť pro uložení řádku do bufferu\n");
-            exit(1);
-        }
-
-        memcpy(buffer.data[i], read_line, ROW_SIZE);
         i++;
     }
 
@@ -125,23 +123,15 @@ int main(int argc, char *argv[]) {
         fclose(input_file);
     }
 
-    // Set the start position for writing output by configured direction
-    int start_row;
     if (end_offset) {
-        start_row = (i + 1) - row_offset;
-    } else {
-        start_row = row_offset;
+        // Write output of the buffer
+        for (int j = 0; j < row_offset; j++) {
+            printf("%s", buffer[j]);
+            free(buffer[j]);
+        }
+
+        free(buffer);
     }
 
-    // Write output
-    for (int j = start_row - 1; j < i; j++) {
-        printf("%s", buffer.data[j]);
-    }
-
-    for (int j = 0; j < i; j++) {
-        free(buffer.data[j]);
-    }
-
-    free(buffer.data);
     return 0;
 }
