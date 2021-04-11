@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.19)
 project(IJC\ |\ 2nd\ homework LANGUAGES C CXX)
+set(CMAKE_SOURCE_DIR src/)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_COMPILER gcc)
@@ -12,7 +13,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 #add_library(libhtab.a htab.h)
 #add_library(libhtab.so htab.h)
 
-add_executable(tail tail.c)
-add_executable(wordcount-cc wordcount.cc)
-add_executable(wordcount wordcount.c htab.h io.c io.h)
-add_executable(wordcount-dynamic wordcount.c htab.h io.c io.h)
+add_executable(tail src/tail.c)
+add_executable(wordcount-cc src/wordcount.cc)
+add_executable(wordcount src/wordcount.c src/htab.h src/io.c src/io.h)
+add_executable(wordcount-dynamic src/wordcount.c src/htab.h src/io.c src/io.h)

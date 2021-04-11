@@ -22,6 +22,7 @@ typedef struct buffer {
 int main(int argc, char *argv[]) {
     // File to read from
     FILE *input_file = stdin;
+    bool default_file = true;
     // Row offset from the beginning/end of the file (how many rows will be read)
     int row_offset = 10;
     // Row offset direction - true => from end of file; false => from the beginning of the file
@@ -53,6 +54,8 @@ int main(int argc, char *argv[]) {
             fprintf(stderr, "Argument bez přepínače musí být platná cesta k souboru\n"
                             "Pokud byla zadána platná cesta, soubor se nepodařilo otevřít\n");
             exit(1);
+        } else {
+            default_file = false;
         }
     }
 
@@ -115,6 +118,11 @@ int main(int argc, char *argv[]) {
 
         memcpy(buffer.data[i], read_line, ROW_SIZE);
         i++;
+    }
+
+    // Close file if it isn't stdin
+    if (!default_file) {
+        fclose(input_file);
     }
 
     // Set the start position for writing output by configured direction

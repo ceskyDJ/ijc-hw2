@@ -9,3 +9,8 @@ wordcount-dynamic
 libhtab.a
 libhtab.so
 xsmahe01.zip
+
+test/program-output
+test/reference-output
+test/valgrind-output
+test/valgrind-output.core.*

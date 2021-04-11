@@ -1,0 +1,32 @@
+name: tail-tests
+on: [push]
+jobs:
+  build:
+    name: Build binary
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run Make
+        run: make
+
+  unit:
+    name: Unit tests for tail
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run tests
+        run: ./test/tail-unit.sh 2> /dev/null
+
+  valgrind:
+    name: Valgrind memory leaks tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Valgrind
+        run: apt install -y valgrind
+
+      - name: Run tests
+        run: ./test/tail-valgrind.sh 2> /dev/null
