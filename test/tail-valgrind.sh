@@ -73,6 +73,12 @@ verify "./src/tail -n 1 $DIR/bad-file" "tail -n 1 bad-file"
 # Bad filename 3
 verify "./src/tail -n +4 $DIR/bad-file" "tail -n +4 bad-file"
 
+# Input arguments switches special variants 1
+verify "./src/tail -n22 $DIR/test-file" "tail -n22 test-file"
+
+# Input arguments switches special variants 2
+verify "./src/tail -n+13 $DIR/test-file" "tail -n+13 test-file"
+
 # Exit code by results
 if [ $error == true ]; then
   exit 1

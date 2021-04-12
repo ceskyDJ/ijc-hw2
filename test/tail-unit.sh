@@ -137,6 +137,16 @@ Pokud byla zadána platná cesta, soubor se nepodařilo otevřít" >$DIR/referen
 ./src/tail -n +4 $DIR/bad-file > /dev/null 2>$DIR/program-output ; exit_code=$?
 verify_error "tail -n +4 bad-file" $exit_code
 
+# Input arguments switches special variants 1
+tail -n22 $DIR/test-file >$DIR/reference-output
+./src/tail -n22 $DIR/test-file >$DIR/program-output ; exit_code=$?
+verify_output "tail -n22 test-file" $exit_code
+
+# Input arguments switches special variants 2
+tail -n+13 $DIR/test-file >$DIR/reference-output
+./src/tail -n+13 $DIR/test-file >$DIR/program-output ; exit_code=$?
+verify_output "tail -n+13 test-file" $exit_code
+
 # Exit code by results
 if [ $error == true ]; then
   exit 1

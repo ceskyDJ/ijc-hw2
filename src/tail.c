@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
         // Switch arguments
         // Row offset (from the beginning/end of the file)
         if (strcmp(argv[i], "-n") == 0) {
+            // Types: -n 10; -n +10
             if ((i + 1) >= argc || (row_offset = (int)strtol(argv[i + 1], NULL, 10)) <= 0) {
                 fprintf(stderr, "Po přepínači -n musí následovat kladné celé číslo případně s prefixem '+'\n");
                 exit(1);
@@ -39,6 +40,22 @@ int main(int argc, char *argv[]) {
 
             // There is the already processed value of -n switch at next index
             i++;
+            // Move to processing another argument
+            continue;
+        } else if(strstr(argv[i], "-n") != NULL) {
+            // Types: -n10; -n+10
+            // "-n" => +2
+            if ((row_offset = (int)strtol(argv[i] + 2, NULL, 10)) <= 0) {
+                fprintf(stderr, "Hodnota přepínače -n musí být kladné celé číslo případně s prefixem '+'\n");
+                exit(1);
+            }
+
+            // Change row offset direction to: from the beginning of the file
+            // [0] => '-', [1] => 'n'
+            if (argv[i][2] == '+') {
+                end_offset = false;
+            }
+
             // Move to processing another argument
             continue;
         }
