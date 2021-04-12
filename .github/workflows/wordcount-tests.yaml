@@ -1,0 +1,14 @@
+name: wordcount-tests
+on: [push]
+jobs:
+  io-unit:
+    name: Unit tests for io module
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build binary
+        run: cd src ; make ; gcc -std=c99 ../test/io-test.c io.o -o io-test
+
+      - name: Run tests
+        run: ./test/io-unit.sh 2> /dev/null
