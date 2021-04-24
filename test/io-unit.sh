@@ -74,7 +74,7 @@ printf "\nbaz\n ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'\nbaz\n ...' --> read_line()" $exit_code
 
 # Bigger word
-printf "this-is-super-long-word-for-testing-read_line-function-in-io-module-used-for-unit-tests-of-this-module-this-is-still-valid-part\n127\nY\n" >$DIR/reference-output
+printf "this-is-super-long-word-for-testing-read_line-function-in-io-module-used-for-unit-tests-of-this-module-this-is-still-valid-part\n143\nY\n" >$DIR/reference-output
 printf "this-is-super-long-word-for-testing-read_line-function-in-io-module-used-for-unit-tests-of-this-module-this-is-still-valid-part-but-this-is-not ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'this-is-super-long-word-for-testing-read_line-function-in-io-module-used-for-unit-tests-of-this-module-this-is-still-valid-part-but-this-is-not ...' --> read_line()" $exit_code
 

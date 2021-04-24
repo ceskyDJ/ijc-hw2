@@ -12,17 +12,20 @@
  * @param s Pointer to string where to save the word to
  * @param max Maximum length of the word
  * @param f File where to read from
- * @return 0 if success of EOF if end of file has been reached
+ * @return Real word length (can be longer than max) if success of EOF if end of file has been reached
  */
 int read_word(char *s, int max, FILE *f) {
     int c;
     int length = 0;
-    // Read word (until isspace() char is read)
+    // Read word (until isspace() char is read - spaces before first non-space character are ignored)
     while ((c = fgetc(f)) != EOF && !(isspace(c) && length > 0)) {
         // Spaces before word are ignored
-        // Chars are append until maximum length is achieved
-        if(!isspace(c) && length < (max - 1)) {
-            s[length] = (char)c;
+        if(!isspace(c)) {
+            // Chars are append until maximum length is achieved
+            if (length < (max - 1)) {
+                s[length] = (char)c;
+            }
+
             length++;
         }
     }
