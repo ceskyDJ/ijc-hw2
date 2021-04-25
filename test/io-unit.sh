@@ -40,52 +40,52 @@ function verify_output() {
 
 # Basic run
 printf "first-word\n10\nY\n" >$DIR/reference-output
-printf "first-word second-word ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "first-word second-word ..." | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'first-word second-word ...' --> read_line()" $exit_code
 
 # New line
 printf "foo\n3\nY\n" >$DIR/reference-output
-printf "foo\n ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "foo\n ..." | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'foo\n ...' --> read_line()" $exit_code
 
 # Tabulator
 printf "bar\n3\nY\n" >$DIR/reference-output
-printf "bar\t ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "bar\t ..." | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'bar\t ...' --> read_line()" $exit_code
 
 # Tabulator
 printf "baz\n3\nY\n" >$DIR/reference-output
-printf "baz   ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "baz   ..." | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'baz   ...' --> read_line()" $exit_code
 
 # Spaces around
 printf "baz\n3\nY\n" >$DIR/reference-output
-printf "   baz   ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "   baz   ..." | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'   baz   ...' --> read_line()" $exit_code
 
 # Tabulators around
 printf "baz\n3\nY\n" >$DIR/reference-output
-printf "\tbaz\t ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "\tbaz\t ..." | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'\tbaz\t ...' --> read_line()" $exit_code
 
 # New lines around
 printf "baz\n3\nY\n" >$DIR/reference-output
-printf "\nbaz\n ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "\nbaz\n ..." | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'\nbaz\n ...' --> read_line()" $exit_code
 
 # Bigger word
 printf "this-is-super-long-word-for-testing-read_line-function-in-io-module-used-for-unit-tests-of-this-module-this-is-still-valid-part\n143\nY\n" >$DIR/reference-output
-printf "this-is-super-long-word-for-testing-read_line-function-in-io-module-used-for-unit-tests-of-this-module-this-is-still-valid-part-but-this-is-not ..." | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "this-is-super-long-word-for-testing-read_line-function-in-io-module-used-for-unit-tests-of-this-module-this-is-still-valid-part-but-this-is-not ..." | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'this-is-super-long-word-for-testing-read_line-function-in-io-module-used-for-unit-tests-of-this-module-this-is-still-valid-part-but-this-is-not ...' --> read_line()" $exit_code
 
 # Empty input
 echo "EOF" >$DIR/reference-output
-printf "" | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "" | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'' --> read_line()" $exit_code
 
 # End of the file
 echo "EOF" >$DIR/reference-output
-printf "   small-word-at-the-end" | ./src/io-test >$DIR/program-output ; exit_code=$?
+printf "   small-word-at-the-end" | ./test/io-test >$DIR/program-output ; exit_code=$?
 verify_output "'   small-word-at-the-end' --> read_line()" $exit_code
 
 # Exit code by results
