@@ -38,6 +38,7 @@ bool test_htab_init() {
         }
     }
 
+    free(table);
     return true;
 }
 
