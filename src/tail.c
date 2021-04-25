@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
 
     // Prepare buffer with initial allocated memory
     // Buffer is not needed if the opposite direction mode is activated (end_offset == true)
-    buffer_t *buffer;
+    buffer_t *buffer = NULL;
     if (end_offset) {
         buffer = alloc_buffer(row_offset);
     }
