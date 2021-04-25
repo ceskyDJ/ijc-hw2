@@ -30,3 +30,21 @@ jobs:
 
       - name: Run tests
         run: LD_LIBRARY_PATH=./src ./test/htab-test 2>/dev/null
+
+  htab-valgrind:
+    name: Valgrind tests for htab library (based on unit tests of this library)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Valgrind
+        run: sudo apt install -y valgrind
+
+      - name: Build program modules binaries
+        run: cd src ; make ; cd ..
+
+      - name: Build test binaries
+        run: cd test ; make ; cd ..
+
+      - name: Run tests
+        run: ./test/htab-valgrind.sh 2> /dev/null
