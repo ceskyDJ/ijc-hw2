@@ -1,16 +1,25 @@
+# IDE files
 .idea/
 
+# CMake build help files
 cmake-build-debug/
 
+# Help files
 *.o
-tail
-wordcount
-wordcount-dynamic
-libhtab.a
-libhtab.so
-xsmahe01.zip
+*.zip
 
+# Binaries in src/
+src/tail
+src/wordcount
+src/wordcount-dynamic
+src/libhtab.a
+src/libhtab.so
+
+# Help files in test/
 test/program-output
 test/reference-output
 test/valgrind-output
 test/valgrind-output.core.*
+
+# Binaries in test/
+test/io-test
