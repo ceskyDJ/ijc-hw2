@@ -36,4 +36,4 @@ pack:
 
 # make clean
 clean:
-	rm -f tail xsmahe01.zip *.o
+	rm -f tail wordcount wordcount-dynamic *.o
