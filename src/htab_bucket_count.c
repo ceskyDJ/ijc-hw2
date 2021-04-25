@@ -4,3 +4,12 @@
 // Compiler: gcc 10.2.1
 
 #include "htab_private.h"
+
+/**
+ * Returns number of keys that can be stored in a hash table
+ * @param t Pointer to the hash table
+ * @return Number of keys
+ */
+size_t htab_bucket_count(const htab_t * t) {
+    return t->arr_size;
+}

@@ -20,3 +20,6 @@ add_executable(tail src/tail.c)
 add_executable(wordcount-cc src/wordcount.cc)
 add_executable(wordcount src/wordcount.c src/htab.h src/io.c src/io.h)
 add_executable(wordcount-dynamic src/wordcount.c src/htab.h src/io.c src/io.h)
+
+target_link_libraries(wordcount libhtab.a)
+target_link_libraries(wordcount-dynamic libhtab.so)

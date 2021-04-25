@@ -7,13 +7,13 @@
 
 // Structure for creating linked-list of pairs stored in hash table
 struct htab_item {
-    struct htab_pair * next; // Next pair
+    struct htab_item * next; // Next pair
     struct htab_pair pair;   // Data of the actual pair
 };
 
 // Full definition of hash table structure for using by library functions
 struct htab {
     size_t size;                 // Number of items stored in the hash table
-    size_t arr_size;             // Number of keys used in the hash table (size of the item_arr array)
-    struct htab_item item_arr[]; // Array with linked-lists that contains (key, value) pairs
+    size_t arr_size;             // Number of keys used in the hash table (size of the ptr_array array)
+    struct htab_item *ptr_array[]; // Array with linked-lists that contains (key, value) pairs
 };
