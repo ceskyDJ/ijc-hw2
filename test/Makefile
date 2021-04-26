@@ -6,7 +6,7 @@ CXX_FLAGS=-std=c++11 -O2
 .PHONY: all clean
 
 # make
-all: io-test htab-test
+all: io-test htab-test wordcount-cc
 
 # Build dependencies for some tests
 wordcount-cc: ../src/wordcount.cc
