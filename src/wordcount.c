@@ -32,7 +32,11 @@ void print_word_statistics(htab_pair_t *data) {
     printf("%s\t%d\n", data->key, data->value);
 }
 
-int main() {
+/**
+ * Program for counting words in typed sentence (input is gotten from stdin)
+ * @return Exit code. 0 if success, 1 if something failed
+ */
+int main(void) {
     clock_t start = clock();
 
     // Prepare hash table for storing words
