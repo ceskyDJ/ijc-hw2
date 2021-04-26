@@ -3,7 +3,7 @@
 #include "../src/io.h"
 
 int main(void) {
-    char word[128];
+    char word[128] = "";
 
     int length = read_word((char *)&word, 128, stdin);
 
