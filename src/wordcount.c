@@ -4,6 +4,7 @@
 // Compiler: gcc 10.2.1
 
 #include <stdio.h> // stdin, stderr, EOF, fprintf, printf
+#include <time.h> // clock_t, clock
 #include "htab.h" // htab_t, htab_init, htab_lookup_add, htab_pair_t, htab_free, htab_move
 #include "io.h" // read_word
 
@@ -32,6 +33,8 @@ void print_word_statistics(htab_pair_t *data) {
 }
 
 int main() {
+    clock_t start = clock();
+
     // Prepare hash table for storing words
     htab_t *hash_table;
     if ((hash_table = htab_init(HASH_TABLE_ARR_SIZE)) == NULL) {
@@ -76,5 +79,9 @@ int main() {
 
     // Clean allocated memory
     htab_free(hash_table);
+
+    // Measure script execution time
+    fprintf(stderr, "Time = %.3g\n", (double)(clock() - start) / CLOCKS_PER_SEC);
+
     return 0;
 }
