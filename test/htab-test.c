@@ -14,6 +14,7 @@ void print_debug_info(htab_t *table);
 bool test(test_fun_t fun, char *test_name);
 void mock_erase(htab_pair_t *pair);
 void mock_printf(htab_pair_t *pair);
+bool test_added_item(htab_t *table, char *key);
 
 bool test_htab_init() {
     size_t arr_size = 11;
@@ -81,8 +82,11 @@ bool test_htab_find() {
         exit(1);
     }
 
+    char *key_copy = malloc(strlen(item_name) + 1);
+    memcpy(key_copy, item_name, strlen(item_name) + 1);
+
     item->next = NULL;
-    item->pair.key = item_name;
+    item->pair.key = key_copy;
     item->pair.value = 0;
 
     size_t index = (htab_hash_function(item_name) % table->arr_size);
@@ -105,38 +109,18 @@ bool test_htab_lookup_add() {
     size_t arr_size = 11;
     htab_t *table = htab_init(arr_size);
 
-    if (htab_lookup_add(table, "hello") == NULL) {
-        htab_free(table);
-        return false;
-    }
-    if (htab_lookup_add(table, "hi") == NULL) {
-        htab_free(table);
-        return false;
-    }
-    if (htab_lookup_add(table, "test") == NULL) {
-        htab_free(table);
-        return false;
-    }
-    if (htab_lookup_add(table, "foo") == NULL) {
-        htab_free(table);
-        return false;
-    }
-    if (htab_lookup_add(table, "bar") == NULL) {
-        htab_free(table);
-        return false;
-    }
-    if (htab_lookup_add(table, "baz") == NULL) {
-        htab_free(table);
-        return false;
-    }
-    if (htab_lookup_add(table, "htab") == NULL) {
-        htab_free(table);
-        return false;
+    char items[8][8] = {"super", "veta", "se", "super", "slovy", "se", "super", "pismeny"};
+    for (size_t i = 0; i < 8; i++) {
+        htab_lookup_add(table, items[i]);
+        if (!test_added_item(table, items[i])) {
+            fprintf(stderr, "Item '%s' with number %zu wasn't added successfully", items[i], i);
+            return false;
+        }
+
+        print_debug_info(table);
     }
 
-    print_debug_info(table);
-
-    if (table->size != 7) {
+    if (table->size != 5) {
         htab_free(table);
         return false;
     }
@@ -371,7 +355,6 @@ bool test_htab_for_each() {
     // Changing operation
     global_table = table;
     htab_for_each(table, mock_erase);
-    fprintf(stderr, "it works\n"); // TODO: remove
     fprintf(stderr, "\tTable after for each:\n");
     print_debug_info(table);
 
@@ -457,4 +440,17 @@ void mock_printf(htab_pair_t *pair) {
     fprintf(stderr, "\t\tNew value: %s\n", loaded_strings[loaded_string_id]);
 
     loaded_string_id++;
+}
+
+bool test_added_item(htab_t *table, char *key) {
+    htab_lookup_add(table, key);
+    size_t index = (htab_hash_function(key) % table->arr_size);
+
+    for (struct htab_item *item = table->ptr_array[index]; item != NULL; item = item->next) {
+        if (strcmp(item->pair.key, key) == 0) {
+            return true;
+        }
+    }
+
+    return false;
 }
