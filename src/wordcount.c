@@ -20,7 +20,9 @@ size_t htab_hash_function(htab_key_t str) {
 #endif
 
 // Number of "rows" in a hash table
-#define HASH_TABLE_ARR_SIZE 128
+// 512 is good for texts with < 10^4 words (~ 20 words in the linked list)
+// with more words the speed will be increased (we need to iterate over many linked-lists)
+#define HASH_TABLE_ARR_SIZE 512
 // Maximum length of loaded word (without \0)
 #define MAX_WORD_LENGTH 127
 
