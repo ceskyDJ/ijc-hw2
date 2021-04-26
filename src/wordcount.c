@@ -47,8 +47,6 @@ int main(void) {
         return 1;
     }
 
-    // TODO: htab_move
-
     // Loading words into the hash table
     char word[MAX_WORD_LENGTH + 1] = ""; // +1 --> \0
     bool warned = false;
@@ -78,11 +76,31 @@ int main(void) {
         memset(word, '\0', MAX_WORD_LENGTH + 1); // +1 --> \0 at the end of string
     }
 
+#ifdef MOVETEST
+    // Test of the htab_move function
+    htab_t *new_hash_table;
+    if ((new_hash_table = htab_move(HASH_TABLE_ARR_SIZE, hash_table)) == NULL) {
+        fprintf(stderr, "Došlo k chybě při alokaci paměti pro novou rozptýlenou tabulku\n");
+
+        htab_free(hash_table);
+        return 1;
+    }
+
+    // Old table can be freed now
+    htab_free(hash_table);
+
+    // Print statistics for each of the loaded words
+    htab_for_each(new_hash_table, print_word_statistics);
+
+    // Clean allocated memory
+    htab_free(new_hash_table);
+#else // MOVETEST
     // Print statistics for each of the loaded words
     htab_for_each(hash_table, print_word_statistics);
 
     // Clean allocated memory
     htab_free(hash_table);
+#endif // MOVETEST
 
     // Measure script execution time
     fprintf(stderr, "Time = %.3g\n", (double)(clock() - start) / CLOCKS_PER_SEC);
