@@ -27,9 +27,20 @@ htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
         return NULL;
     }
 
+    // Allocate memory for the key (provided pointer in key parameter cannot be used)
+    char *key_copy;
+    // +1 --> \0 at the end of the string (strlen doesn't count with it)
+    if ((key_copy = malloc(strlen(key) + 1)) == NULL) {
+        return NULL;
+    }
+
+    // Create a copy of the key
+    // +1 --> \0 at the end of the string (strlen doesn't count with it)
+    memcpy(key_copy, key, strlen(key) + 1);
+
     // Fill the new item with default values and the key
     new_item->next = NULL;
-    new_item->pair.key = key;
+    new_item->pair.key = key_copy;
     new_item->pair.value = 0;
 
     // Count index in the hash table

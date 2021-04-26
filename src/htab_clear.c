@@ -17,8 +17,13 @@ void htab_clear(htab_t * t) {
         struct htab_item *item = t->ptr_array[i];
         struct htab_item *next;
         while(item != NULL) {
+            // Backup pointer to the next item (it will be lost after freeing current item)
             next = item->next;
-            free(item);
+
+            // Free item and its data
+            FREE_ITEM(item);
+
+            // Use backed up pointer to the next pointer and move to it for the next iteration of the while
             item = next;
         }
 

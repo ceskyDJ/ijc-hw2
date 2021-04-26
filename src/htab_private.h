@@ -17,3 +17,10 @@ struct htab {
     size_t arr_size;             // Number of keys used in the hash table (size of the ptr_array array)
     struct htab_item *ptr_array[]; // Array with linked-lists that contains (key, value) pairs
 };
+
+// Item (struct htab_item) has complicated free (not only free(item)),
+// so this macro solves problem with code redundancy
+#define FREE_ITEM(item) do {                                                                                           \
+    free((char *)(item)->pair.key);                                                                                    \
+    free((item));                                                                                                      \
+} while(0);

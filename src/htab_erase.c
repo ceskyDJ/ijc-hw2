@@ -33,7 +33,9 @@ bool htab_erase(htab_t * t, htab_key_t key) {
             // Table size is smaller now
             t->size--;
 
-            free(item);
+            // Free item and its data
+            FREE_ITEM(item);
+
             return true;
         }
 
