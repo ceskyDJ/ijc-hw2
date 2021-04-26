@@ -9,7 +9,7 @@
  * Moves data from some hash table to a newly created one
  * @param n Size of the new hash table
  * @param from Pointer to the source hash table (where to copy from)
- * @return The new hash table; NULL => n < size of the source hash table
+ * @return The new hash table; NULL => n < size of the source hash table, malloc error
  */
 htab_t *htab_move(size_t n, htab_t *from) {
     // The new hash table can has the same size or be bigger only
@@ -18,7 +18,10 @@ htab_t *htab_move(size_t n, htab_t *from) {
     }
 
     // Create new hash table
-    htab_t *new_table = htab_init(n);
+    htab_t *new_table;
+    if ((new_table = htab_init(n)) == NULL) {
+        return NULL;
+    }
 
     // Move data from old hash table to the new one
     for (size_t i = 0; i < from->arr_size; i++) {
