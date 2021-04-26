@@ -56,4 +56,4 @@ pack:
 
 # make clean
 clean:
-	rm -f tail wordcount wordcount-dynamic *.o
+	rm -f tail wordcount wordcount-dynamic libhtab.a libhtab.so *.o
