@@ -21,7 +21,9 @@ test/program-output
 test/reference-output
 test/valgrind-output
 test/valgrind-output.core.*
+test/input
 
 # Binaries in test/
 test/io-test
 test/htab-test
+test/wordcount-cc
