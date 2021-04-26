@@ -103,7 +103,7 @@ int main(void) {
 #endif // MOVETEST
 
     // Measure script execution time
-    fprintf(stderr, "Time = %.3g\n", (double)(clock() - start) / CLOCKS_PER_SEC);
+    fprintf(stderr, "Doba trvání = %.3g\n", (double)(clock() - start) / CLOCKS_PER_SEC);
 
     return 0;
 }
