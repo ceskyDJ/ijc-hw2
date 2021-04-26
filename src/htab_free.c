@@ -4,7 +4,7 @@
 // Compiler: gcc 10.2.1
 
 #include <stdlib.h> // free
-#include "htab_private.h"
+#include "htab_private.h" // htab_clear
 
 /**
  * Deallocates a hash table

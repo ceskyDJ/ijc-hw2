@@ -3,8 +3,8 @@
 // Author: Michal Šmahel, FIT
 // Compiler: gcc 10.2.1
 
-#include <stdlib.h> // free
-#include "htab_private.h"
+#include <string.h> // strcmp
+#include "htab_private.h" // htab_hash_function
 
 /**
  * Removes a pair (key, value)  with a key from a hash table

@@ -3,6 +3,7 @@
 // Author: Michal Šmahel, FIT
 // Compiler: gcc 10.2.1
 
+#include <stdlib.h> // free
 #include "htab.h"
 
 // Structure for creating linked-list of pairs stored in hash table

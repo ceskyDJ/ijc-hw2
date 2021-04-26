@@ -3,7 +3,7 @@
 // Author: Michal Šmahel, FIT
 // Compiler: gcc 10.2.1
 
-#include <stdlib.h>
+#include <stdlib.h> // malloc
 #include "htab_private.h"
 
 /**

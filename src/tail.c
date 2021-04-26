@@ -3,8 +3,8 @@
 // Author: Michal Šmahel, FIT
 // Compiler: gcc 10.2.1
 
-#include <stdio.h> // FILE, fprintf, fopen, printf
-#include <string.h> // strcmp
+#include <stdio.h> // FILE, fprintf, fopen, fclose, printf, stderr
+#include <string.h> // strcmp, memset, strstr
 #include <stdlib.h> // strtol, exit, malloc, realloc
 #include <stdbool.h>
 

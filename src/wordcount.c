@@ -19,7 +19,7 @@ size_t htab_hash_function(htab_key_t str) {
     // Source: https://stackoverflow.com/a/57960443
     uint32_t h = 3323198485ul;
 
-    for (;*str;++str) {
+    for (; *str; ++str) {
         h ^= *str;
         h *= 0x5bd1e995;
         h ^= h >> 15;

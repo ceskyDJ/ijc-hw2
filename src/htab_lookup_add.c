@@ -4,7 +4,8 @@
 // Compiler: gcc 10.2.1
 
 #include <stdlib.h> // malloc
-#include "htab_private.h"
+#include <string.h> // memcpy
+#include "htab_private.h" // htab_find
 
 /**
  * Tries to find a pair (key, value) with a key in a hash table, if it's not found, the pair is added

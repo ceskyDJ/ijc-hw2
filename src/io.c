@@ -3,7 +3,7 @@
 // Author: Michal Šmahel, FIT
 // Compiler: gcc 10.2.1
 
-#include <stdio.h> // fgetc, ungetc
+#include <stdio.h> // fgetc, ungetc, EOF
 #include <ctype.h> // isspace
 #include "io.h"
 

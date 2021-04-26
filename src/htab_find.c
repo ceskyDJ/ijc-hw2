@@ -4,7 +4,7 @@
 // Compiler: gcc 10.2.1
 
 #include <string.h> // strcmp
-#include "htab_private.h"
+#include "htab_private.h" // htab_hash_function
 
 /**
  * Finds an pair (key, value) by a key in a hash table

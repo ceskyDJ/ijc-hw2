@@ -6,7 +6,7 @@
 #ifndef IJC_2ND_HOMEWORK_IO_H
 #define IJC_2ND_HOMEWORK_IO_H
 
-#include <stdio.h>
+#include <stdio.h> // FILE
 
 /**
  * Reads one word from the file

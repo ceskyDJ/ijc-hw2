@@ -3,7 +3,6 @@
 // Author: Michal Šmahel, FIT
 // Compiler: gcc 10.2.1
 
-#include <stdlib.h> // free
 #include "htab_private.h"
 
 /**

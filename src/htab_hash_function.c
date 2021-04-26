@@ -1,7 +1,7 @@
 // htab_hash_function.c
 // Source: http://www.fit.vutbr.cz/study/courses/IJC/public/DU2.html
 
-#include <stdint.h>
+#include <stdint.h> // unit32_t
 #include "htab_private.h"
 
 /**

@@ -3,7 +3,7 @@
 // Author: Michal Šmahel, FIT
 // Compiler: gcc 10.2.1
 
-#include "htab_private.h"
+#include "htab_private.h" // htab_init
 
 /**
  * Moves data from some hash table to a newly created one
