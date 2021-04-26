@@ -10,6 +10,7 @@ cmake-build-debug/
 
 # Binaries in src/
 src/tail
+src/wordcount-cc
 src/wordcount
 src/wordcount-dynamic
 src/libhtab.a
