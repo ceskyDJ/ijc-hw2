@@ -5,6 +5,7 @@
 
 #include <stdio.h> // stdin, stderr, EOF, fprintf, printf
 #include <time.h> // clock_t, clock
+#include <inttypes.h> // uint32_t
 #include "htab.h" // htab_t, htab_init, htab_lookup_add, htab_pair_t, htab_free, htab_move
 #include "io.h" // read_word
 
@@ -15,7 +16,16 @@
  * @return Counted hash
  */
 size_t htab_hash_function(htab_key_t str) {
-    // TODO: implement this function
+    // Source: https://stackoverflow.com/a/57960443
+    uint32_t h = 3323198485ul;
+
+    for (;*str;++str) {
+        h ^= *str;
+        h *= 0x5bd1e995;
+        h ^= h >> 15;
+    }
+
+    return h;
 }
 #endif
 
